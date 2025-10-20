@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>M.ALI.ABDULLAH — Portfolio</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (icons) -->
+  <script src="https://kit.fontawesome.com/1e5d1b7f3a.js" crossorigin="anonymous" defer></script>
+
+  <style>
+    :root{
+      --bg-1: #f6f9fc;
+      --bg-2: #eaf1f9;
+      --glass: rgba(255,255,255,0.64);
+      --accent: #0b76ff;
+      --muted: #6b7280;
+      --card-shadow: 0 10px 40px rgba(15,23,42,0.08);
+      --glass-border: rgba(255,255,255,0.7);
+      --pill-bg: rgba(11,118,255,0.08);
+    }
+
+    html,body { height:100%; }
+    body{
+      margin:0;
+      font-family:'Poppins',Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background: linear-gradient(135deg,var(--bg-1) 0%, var(--bg-2) 100%);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      padding-bottom:60px;
+    }
+
+    /* Background animation */
+    .bg-animated {
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background: radial-gradient(circle at 10% 20%, rgba(11,118,255,0.06), transparent 10%),
+                  radial-gradient(circle at 90% 80%, rgba(3,201,169,0.03), transparent 10%);
+      animation: floatBG 12s linear infinite;
+    }
+    @keyframes floatBG {
+      0%{ transform: translateY(0) rotate(0deg) }
+      50%{ transform: translateY(-10px) rotate(3deg) }
+      100%{ transform: translateY(0) rotate(0deg) }
+    }
+
+    /* Navbar */
+    .nav-wrap {
+      position:fixed;
+      top:18px;
+      left:50%;
+      transform:translateX(-50%);
+      width:calc(100% - 40px);
+      max-width:1100px;
+      z-index:60;
+      pointer-events:auto;
+    }
+    .navbar-glass {
+      backdrop-filter: blur(8px) saturate(120%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.6));
+      border-radius:14px;
+      border:1px solid var(--glass-border);
+      box-shadow: var(--card-shadow);
+      padding:6px 12px;
+    }
+    .navbar-brand {
+      font-weight:700;
+      color:var(--accent) !important;
+      letter-spacing:0.4px;
+      font-family: 'Poppins', 'Inter', sans-serif;
+    }
+    .nav-link { color: #0f172a !important; opacity:0.9; padding:6px 10px; }
+    .nav-link:hover { color:var(--accent) !important; }
+
+    /* Hero */
+    #hero {
+      min-height:86vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:80px 18px 40px;
+    }
+    .hero-inner {
+      max-width:1100px;
+      width:100%;
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    /* Glass card */
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.66), rgba(255,255,255,0.56));
+      border-radius: 18px;
+      padding:22px;
+      border:1px solid rgba(255,255,255,0.7);
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+
+    /* Profile */
+    .profile {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+      text-align:center;
+    }
+    .profile img{
+      width:170px;
+      height:170px;
+      object-fit:cover;
+      border-radius:50%;
+      border:4px solid rgba(11,118,255,0.12);
+      box-shadow:0 8px 30px rgba(11,118,255,0.08);
+      transition: transform .4s ease;
+    }
+    .profile img:hover { transform: translateY(-6px) scale(1.02); }
+
+    .name {
+      font-size:1.45rem;
+      font-weight:700;
+      color:var(--accent);
+      letter-spacing:0.6px;
+    }
+    .role {
+      font-size:0.98rem;
+      color:var(--muted);
+    }
+
+    /* Intro */
+    .intro {
+      padding:18px;
+    }
+    .intro h2 {
+      margin:0 0 8px 0;
+      font-size:1.6rem;
+      color:#0b1626;
+    }
+    .intro p { color:#344154; margin-bottom:18px; min-height:44px; }
+
+    .cta-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
+    .btn-accent {
+      background:var(--accent);
+      color:white;
+      border-radius:10px;
+      padding:10px 16px;
+      border:none;
+      font-weight:600;
+      box-shadow:0 8px 20px rgba(11,118,255,0.12);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .btn-accent:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(11,118,255,0.16); }
+    .ghost {
+      border-radius:10px;
+      padding:10px 14px;
+      background:transparent;
+      border:1px solid rgba(15,23,42,0.06);
+      color:#0f172a;
+      font-weight:600;
+    }
+
+    /* stats */
+    .stats {
+      display:flex;
+      gap:12px;
+      margin-top:16px;
+      flex-wrap:wrap;
+    }
+    .stat {
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.82));
+      border-radius:12px;
+      padding:12px 14px;
+      border:1px solid rgba(0,0,0,0.03);
+      min-width:120px;
+      text-align:center;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+    }
+    .stat .num { font-weight:700; color:var(--accent); font-size:1.1rem; }
+    .stat .lbl { color:var(--muted); font-size:0.86rem; }
+
+    /* Sections */
+    section.content {
+      max-width:1100px;
+      margin:40px auto;
+      padding:28px 18px;
+    }
+    .section-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .section-head h3 { margin:0; color:#0b1626; font-weight:700; letter-spacing:0.3px; }
+    .section-sub { color:var(--muted); font-size:0.95rem; }
+
+    /* Projects grid */
+    .projects-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+    }
+    .project-card {
+      border-radius:14px;
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.62));
+      border:1px solid rgba(255,255,255,0.7);
+      padding:18px;
+      box-shadow: var(--card-shadow);
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(11,118,255,0.08); }
+    .project-card h4 { margin:6px 0 8px 0; color:#062031; font-weight:700; }
+    .project-card p { margin:0; color:#42526e; font-size:0.95rem; }
+    .tech-pill { display:inline-block; margin-top:10px; margin-right:6px; background:var(--pill-bg); color:var(--accent); padding:6px 10px; border-radius:999px; font-weight:700; font-size:0.82rem; }
+
+    /* Skills */
+    .skill {
+      margin-bottom:12px;
+    }
+    .skill .label { display:flex; justify-content:space-between; font-weight:600; color:#0b1626; margin-bottom:6px; }
+    .bar {
+      height:10px;
+      background:rgba(11,118,255,0.08);
+      border-radius:8px;
+      overflow:hidden;
+    }
+    .bar > i {
+      display:block;
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg,var(--accent), #00c1a3);
+      border-radius:8px;
+      transition: width 1.3s cubic-bezier(.2,.9,.2,1);
+    }
+
+    /* Timeline (Education / Experience) */
+    .timeline {
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .timeline-item {
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.76));
+      border:1px solid rgba(0,0,0,0.03);
+    }
+    .timeline-item .dot {
+      width:10px; height:10px; border-radius:50%; background:var(--accent); margin-top:8px;
+    }
+    .timeline-item h5 { margin:0; font-size:1rem; }
+    .timeline-item .muted { font-size:0.9rem; color:var(--muted); }
+
+    /* Contact */
+    .contact-grid {
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:20px;
+      align-items:start;
+    }
+    .contact-form .form-control { border-radius:10px; padding:12px; }
+    .contact-card-side {
+      padding:18px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.66));
+      border:1px solid rgba(255,255,255,0.7);
+      box-shadow:var(--card-shadow);
+    }
+
+    /* Footer */
+    footer {
+      margin-top:36px;
+      padding:28px 18px;
+      text-align:center;
+      color:#475569;
+      font-size:0.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-inner { grid-template-columns: 1fr; padding:8px; gap:18px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-wrap { top:10px; }
+      .profile img { width:150px; height:150px; }
+    }
+
+    /* reveal animation */
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="bg-animated" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <div class="nav-wrap">
+    <nav class="navbar navbar-expand-lg navbar-glass px-3 py-2">
+      <div class="container-fluid">
+        <a class="navbar-brand ms-2" href="#hero">M.ALI.ABDULLAH</a>
+        <div class="d-flex gap-2 ms-auto align-items-center">
+          <a class="nav-link px-2" href="#skills">Skills</a>
+          <a class="nav-link px-2" href="#projects">Projects</a>
+          <a class="nav-link px-2" href="#education">Education</a>
+          <a class="nav-link px-2" href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero / Intro -->
+  <header id="hero">
+    <div class="hero-inner container">
+
+      <!-- left profile -->
+      <div class="glass profile reveal" data-delay="50">
+        <img src="9068.jpg" alt="M.ALI.ABDULLAH" loading="lazy" />
+        <div class="name">M.ALI.ABDULLAH</div>
+        <div class="role">BSc Computer Science • Comsats University Islamabad</div>
+
+        <div style="width:100%; margin-top:14px;">
+          <div class="muted" style="font-size:0.9rem; margin-bottom:8px;">Quick info</div>
+          <div class="stats">
+            <div class="stat">
+              <div class="num">6+</div>
+              <div class="lbl">Projects</div>
+            </div>
+            <div class="stat">
+              <div class="num">4</div>
+              <div class="lbl">Main Techs</div>
+            </div>
+            <div class="stat">
+              <div class="num">2025</div>
+              <div class="lbl">Active</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;">
+            <a class="btn-accent" href="cv.pdf" download><i class="fa fa-download me-2"></i>Download CV</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- right intro -->
+      <div class="intro reveal" data-delay="120">
+        <div class="glass" style="padding:22px 26px;">
+          <h2>Hello — I'm <span style="color:var(--accent)">M.ALI.ABDULLAH</span></h2>
+          <p id="lead-paragraph">I build responsive mobile & web apps, explore AI/ML, and design clean user experiences.</p>
+
+          <div class="cta-row">
+            <a class="ghost" href="#projects"><i class="fa fa-briefcase me-2"></i>See Projects</a>
+            <a class="ghost" href="#contact"><i class="fa fa-envelope me-2"></i>Contact</a>
+          </div>
+
+          <div style="margin-top:16px;" class="muted">Primary technologies</div>
+          <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+            <span class="tech-pill">Flutter</span>
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">Firebase</span>
+            <span class="tech-pill">NLP</span>
+          </div>
+
+          <div class="muted" style="margin-top:14px;">Quick stats</div>
+          <div style="display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;">
+            <div class="stat"><div class="num">200+</div><div class="lbl">Hours Coding</div></div>
+            <div class="stat"><div class="num">15</div><div class="lbl">Assignments</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Skills -->
+  <section id="skills" class="content">
+    <div class="section-head">
+      <div>
+        <h3>Skills</h3>
+        <div class="section-sub">Technologies & expertise I work with frequently</div>
+      </div>
+      <div class="muted">Want a skill added? Edit the labels in code.</div>
+    </div>
+
+    <div class="glass reveal" data-delay="40" style="padding:18px;">
+      <div class="row gx-4">
+        <div class="col-lg-6">
+          <div class="skill">
+            <div class="label"><span>Flutter & Dart</span><span>90%</span></div>
+            <div class="bar"><i data-width="90%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>Python & AI</span><span>85%</span></div>
+            <div class="bar"><i data-width="85%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>HTML/CSS/JS</span><span>95%</span></div>
+            <div class="bar"><i data-width="95%"></i></div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="skill">
+            <div class="label"><span>Firebase & SQL</span><span>80%</span></div>
+            <div class="bar"><i data-width="80%"></i></div>
+          </div>
+
+          <div style="margin-top:22px;">
+            <h5 style="margin-bottom:8px;">Certifications</h5>
+            <div class="muted" style="font-size:0.95rem;">
+              • Coursera — Python for Everybody (example) <br/>
+              • Firebase Essentials (example) <br/>
+              • Machine Learning Basics (example)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="content">
+    <div class="section-head">
+      <h3>Featured Projects</h3>
+      <div class="section-sub">Select projects — brief overview</div>
+    </div>
+
+    <div class="projects-grid reveal" data-delay="60">
+      <article class="project-card">
+        <div style="height:120px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#00c1a3);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;">Smart Attendance</div>
+        <h4>Smart Attendance System</h4>
+        <p>AI facial recognition attendance system using Python, OpenCV, and SQLite. Handles real-time detection and stores attendance logs to a local/remote DB.</p>
+        <div class="tech-pill">Python</div><div class="tech-pill">OpenCV</div><div class="tech-pill">SQLite</div>
+        <div style="margin-top:12px;"><a href="#" class="ghost">View code</a></div>
+      </article>
+
+      <article class="project-card">
+        <div style="height:120px;border-radius:10px;background:linear-gradient(135deg,#ff7a7a,#ffd08a);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;">Expense</div>
+        <h4>Expense Tracker App</h4>
+        <p>Personal finance app built with Flutter. Tracks transactions locally, displays charts, and supports categories & export.</p>
+        <div class="tech-pill">Flutter</div><div class="tech-pill">Provider</div><div class="tech-pill">Charts</div>
+        <div style="margin-top:12px;"><a href="#" class="ghost">Live demo</a></div>
+      </article>
+
+      <article class="project-card">
+        <div style="height:120px;border-radius:10px;background:linear-gradient(135deg,#8e7dff,#60e0ff);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;">Resume AI</div>
+        <h4>AI Resume Analyzer</h4>
+        <p>NLP tool that parses resumes and scores them against job descriptions. Built with Python (spaCy / NLTK) and a simple Flask frontend.</p>
+        <div class="tech-pill">NLP</div><div class="tech-pill">Flask</div><div class="tech-pill">spaCy</div>
+        <div style="margin-top:12px;"><a href="#" class="ghost">Try it</a></div>
+      </article>
+
+      <article class="project-card">
+        <div style="height:120px;border-radius:10px;background:linear-gradient(135deg,#7ee4a3,#34a853);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;">Weather</div>
+        <h4>Weather Predictor Dashboard</h4>
+        <p>ML-backed dashboard that forecasts local weather conditions and visualizes historical trends (proof-of-concept with sklearn).</p>
+        <div class="tech-pill">Python</div><div class="tech-pill">sklearn</div><div class="tech-pill">Matplotlib</div>
+        <div style="margin-top:12px;"><a href="#" class="ghost">Read more</a></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Education & Experience -->
+  <section id="education" class="content">
+    <div class="section-head">
+      <h3>Education & Experience</h3>
+      <div class="section-sub">Timeline of academics & roles</div>
+    </div>
+
+    <div class="glass reveal" data-delay="70" style="padding:18px;">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <h5>BSc Computer Science — COMSATS University Islamabad</h5>
+            <div class="muted">2023 — Present · Registration: FA23-BCS-130</div>
+            <div style="margin-top:6px;" class="muted">Courses: Data Structures, AI/ML basics, Databases, Mobile Development (Flutter).</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <h5>Intern — College IT Lab (example)</h5>
+            <div class="muted">Summer 2024 · Assisted in web app testing and lab automation</div>
+            <div style="margin-top:6px;" class="muted">Worked with faculty to create simple lab tools and attendance integrations.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="content">
+    <div class="section-head">
+      <h3>Contact</h3>
+      <div class="section-sub">Have a project or question? Send a message.</div>
+    </div>
+
+    <div class="glass contact-grid reveal" data-delay="80" style="padding:18px;">
+      <form class="contact-form" style="padding:12px;" onsubmit="submitContact(event)">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input class="form-control" type="text" placeholder="Your name" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input class="form-control" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Message</label>
+          <textarea class="form-control" rows="5" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn-accent" type="submit">Send Message</button>
+          <button type="reset" class="ghost">Reset</button>
+        </div>
+      </form>
+
+      <aside class="contact-card-side">
+        <h5>Get in touch</h5>
+        <p class="muted">Email: <strong>m.ali.abdullah@example.com</strong> (replace with your real email). Connect on GitHub / LinkedIn.</p>
+
+        <div style="margin-top:12px;">
+          <a class="btn-accent" href="#" style="display:inline-block;text-decoration:none;"><i class="fa fa-github me-2"></i> GitHub</a>
+          <a class="ghost" href="#" style="margin-left:8px;"><i class="fa fa-linkedin me-2"></i> LinkedIn</a>
+        </div>
+
+        <hr style="margin:16px 0;border:none;border-top:1px solid rgba(15,23,42,0.06);" />
+        <div class="muted" style="font-size:0.95rem;">Education</div>
+        <div style="margin-top:8px;">
+          <strong>Comsats University Islamabad</strong>
+          <div class="muted" style="font-size:0.9rem;">BSc Computer Science — FA23-BCS-120</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 M.ALI.ABDULLAH — Built with care • COMSATS University Islamabad
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Typing effect for lead paragraph (simple)
+    (function typed(){
+      const el = document.getElementById('lead-paragraph');
+      const texts = [
+        "I build responsive mobile & web apps.",
+        "I explore AI/ML models in Python.",
+        "I design clean, usable user interfaces."
+      ];
+      let idx = 0, pos = 0, deleting = false;
+      function tick(){
+        const txt = texts[idx];
+        el.textContent = txt.substring(0, pos);
+        if (!deleting && pos < txt.length) { pos++; setTimeout(tick, 36); }
+        else if (!deleting && pos === txt.length) { deleting = true; setTimeout(tick, 1000); }
+        else if (deleting && pos > 0) { pos--; setTimeout(tick, 28); }
+        else { deleting = false; idx = (idx + 1) % texts.length; setTimeout(tick, 200); }
+      }
+      tick();
+    })();
+
+    // Reveal elements on scroll
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.reveal');
+      const triggerBottom = window.innerHeight * 0.9;
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < triggerBottom) {
+          const delay = parseInt(el.getAttribute('data-delay') || 0);
+          setTimeout(() => el.classList.add('visible'), delay);
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', () => {
+      // animate skill bars
+      document.querySelectorAll('.bar > i').forEach((i) => {
+        const w = i.getAttribute('data-width') || '80%';
+        setTimeout(() => { i.style.width = w; }, 480);
+      });
+      revealOnScroll();
+    });
+
+    // contact submit (demo only)
+    function submitContact(e){
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      setTimeout(()=> {
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+        alert('Message sent — demo. Configure a backend or email service to receive messages.');
+        e.target.reset();
+      }, 900);
+    }
+  </script>
+
+</body>
+</html>
